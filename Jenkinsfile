@@ -3,11 +3,10 @@ node {
 
   stage 'Lint and unit tests'
   withEnv(['PATH=/usr/local/bin:$PATH']) {
-    sh '
-      source ~/.bash_profile
+    sh """source ~/.bash_profile'
       rbenv global 2.3.1
-      eval "$(rbenv init -)"
-    '
+      eval "\$(rbenv init -)"
+    """
     sh 'bundle install'
     sh 'bundle exec rspec spec/'
   }
