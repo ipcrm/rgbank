@@ -1,3 +1,5 @@
+
+org.jenkinsci.plugins.permissivescriptsecurity.PermissiveWhitelist.enabled=true
 node {
   git 'https://github.com/puppetlabs/rgbank'
 
