@@ -1,5 +1,4 @@
 
-org.jenkinsci.plugins.permissivescriptsecurity.PermissiveWhitelist.enabled=true
 node {
   git 'https://github.com/puppetlabs/rgbank'
 
@@ -22,7 +21,7 @@ node {
   step([$class: 'CopyArtifact', filter: "rgbank-build-${version}.tar.gz", fingerprintArtifacts: true, projectName: env.JOB_NAME, selector: [$class: 'SpecificBuildSelector', buildNumber: env.BUILD_ID], target: '/var/www/html/builds/rgbank'])
   step([$class: 'CopyArtifact', filter: "rgbank.sql", fingerprintArtifacts: true, projectName: env.JOB_NAME, selector: [$class: 'SpecificBuildSelector', buildNumber: env.BUILD_ID], target: '/var/www/html/builds/rgbank'])
 
-  def hostaddress = InetAddress.localHost.hostAddress
+  def hostaddress = 'jenkins.demo.lan'
 
   stage 'Deployment Test'
   puppet.hiera scope: 'beaker', key: 'rgbank-build-version', value: version
