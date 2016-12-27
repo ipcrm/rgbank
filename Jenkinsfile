@@ -35,7 +35,7 @@ node {
   puppet.hiera scope: 'dev', key: 'rgbank-mock-sql-path', value: "http://" + hostaddress + "/builds/rgbank/rgbank.sql"
   withEnv(['PATH=/opt/puppetlabs/bin:/usr/local/bin:$PATH']) {
     sh """
-      puppet job run Rgbank -e dev'
+      puppet job run Rgbank -e dev
     """
   }
 
@@ -53,7 +53,7 @@ node {
   puppet.hiera scope: 'staging', key: 'rgbankmocksqlpath', value: "http://" + hostaddress + "/builds/rgbank/rgbank.sql"
   withEnv(['PATH=/usr/local/bin:$PATH']) {
     sh """
-      puppet job run Rgbank -e staging'
+      puppet job run Rgbank -e staging
     """
   }
 
@@ -71,7 +71,7 @@ node {
   puppet.hiera scope: 'production', key: 'rgbank-mock-sql-path', value: "http://" + hostaddress + "/builds/rgbank/rgbank.sql"
   withEnv(['PATH=/usr/local/bin:$PATH']) {
     sh """
-      puppet job run Rgbank -e production --noop'
+      puppet job run Rgbank -e production --noop
     """
   }
 
@@ -79,7 +79,7 @@ node {
   input "Ready to deploy to production?"
   withEnv(['PATH=/usr/local/bin:$PATH']) {
     sh """
-      puppet job run Rgbank -e production'
+      puppet job run Rgbank -e production
     """
   }
 
