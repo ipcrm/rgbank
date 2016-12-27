@@ -38,9 +38,6 @@ node {
   puppet.codeDeploy 'dev'
   puppet.job 'dev', target: 'Rgbank'
 
-  stage 'Promote to production'
-  input "Ready to test deploy to production?"
-
   stage 'Noop production run'
   puppet.hiera scope: 'production', key: 'rgbank-build-version', value: version
   puppet.hiera scope: 'production', key: 'rgbank-build-path', value: "http://" + hostaddress + "/builds/rgbank/rgbank-build-${version}.tar.gz"
