@@ -47,7 +47,7 @@ node {
 
 
   stage 'Deploy to production'
-  #input "Ready to deploy to production?"
+  // input "Ready to deploy to production?"
   puppet.job 'production', concurrency: 40, target: 'Rgbank'
 
   stage 'Production acceptance tests'
