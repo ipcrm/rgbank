@@ -38,6 +38,17 @@ node {
   puppet.codeDeploy 'dev'
   puppet.job 'dev', target: 'Rgbank'
 
+
+  stage 'Promote to staging'
+  puppet.hiera scope: 'staging', key: 'rgbankbuildversion', value: version
+  puppet.hiera scope: 'staging', key: 'rgbankbuildpath', value: "http://" + hostaddress + "/builds/rgbank/rgbankbuild${version}.tar.gz"
+  puppet.hiera scope: 'staging', key: 'rgbankmocksqlpath', value: "http://" + hostaddress + "/builds/rgbank/rgbank.sql"
+  puppet.codeDeploy 'staging'
+  puppet.job 'staging', target: 'Rgbank'
+
+  stage 'Staging acceptance tests'
+  // Run acceptance tests here to make sure no applications are broken
+
   stage 'Noop production run'
   puppet.hiera scope: 'production', key: 'rgbank-build-version', value: version
   puppet.hiera scope: 'production', key: 'rgbank-build-path', value: "http://" + hostaddress + "/builds/rgbank/rgbank-build-${version}.tar.gz"
@@ -45,11 +56,8 @@ node {
   puppet.codeDeploy 'production'
   puppet.job 'production', noop: true, target: 'Rgbank'
 
-
   stage 'Deploy to production'
   // input "Ready to deploy to production?"
-  puppet.job 'production', concurrency: 40, target: 'Rgbank'
+  puppet.job 'production', target: 'Rgbank'
 
-  stage 'Production acceptance tests'
-  // Run acceptance tests here to make sure no applications are broken
 }
