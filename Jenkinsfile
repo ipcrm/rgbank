@@ -23,11 +23,11 @@ node {
 
   def hostaddress = 'jenkins.demo.lan'
 
-  stage 'Deployment Test'
-  puppet.hiera scope: 'beaker', key: 'rgbank-build-version', value: version
-  puppet.hiera scope: 'beaker', key: 'rgbank-build-path', value: "http://" + hostaddress + "/builds/rgbank/rgbank-build-${version}.tar.gz"
-  puppet.hiera scope: 'beaker', key: 'rgbank-mock-sql-path', value: "http://" + hostaddress + "/builds/rgbank/rgbank.sql"
-  build job: 'puppetlabs-rgbank-spec', parameters: [string(name: 'COMMIT', value: env.rgbank_module_ver)]
+//  stage 'Deployment Test'
+//  puppet.hiera scope: 'beaker', key: 'rgbank-build-version', value: version
+//  puppet.hiera scope: 'beaker', key: 'rgbank-build-path', value: "http://" + hostaddress + "/builds/rgbank/rgbank-build-${version}.tar.gz"
+//  puppet.hiera scope: 'beaker', key: 'rgbank-mock-sql-path', value: "http://" + hostaddress + "/builds/rgbank/rgbank.sql"
+//  build job: 'puppetlabs-rgbank-spec', parameters: [string(name: 'COMMIT', value: env.rgbank_module_ver)]
 
   puppet.credentials 'pe-access-token'
 
