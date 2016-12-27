@@ -35,7 +35,6 @@ node {
   puppet.hiera scope: 'dev', key: 'rgbank-build-version', value: version
   puppet.hiera scope: 'dev', key: 'rgbank-build-path', value: "http://" + hostaddress + "/builds/rgbank/rgbank-build-${version}.tar.gz"
   puppet.hiera scope: 'dev', key: 'rgbank-mock-sql-path', value: "http://" + hostaddress + "/builds/rgbank/rgbank.sql"
-  puppet.codeDeploy 'dev'
   puppet.job 'dev', target: 'Rgbank'
 
   stage 'Dev Acceptance Test'
@@ -50,7 +49,6 @@ node {
   puppet.hiera scope: 'staging', key: 'rgbankbuildversion', value: version
   puppet.hiera scope: 'staging', key: 'rgbankbuildpath', value: "http://" + hostaddress + "/builds/rgbank/rgbankbuild${version}.tar.gz"
   puppet.hiera scope: 'staging', key: 'rgbankmocksqlpath', value: "http://" + hostaddress + "/builds/rgbank/rgbank.sql"
-  puppet.codeDeploy 'staging'
   puppet.job 'staging', target: 'Rgbank'
 
   stage 'Staging Acceptance Test'
@@ -65,7 +63,6 @@ node {
   puppet.hiera scope: 'production', key: 'rgbank-build-version', value: version
   puppet.hiera scope: 'production', key: 'rgbank-build-path', value: "http://" + hostaddress + "/builds/rgbank/rgbank-build-${version}.tar.gz"
   puppet.hiera scope: 'production', key: 'rgbank-mock-sql-path', value: "http://" + hostaddress + "/builds/rgbank/rgbank.sql"
-  puppet.codeDeploy 'production'
   puppet.job 'production', noop: true, target: 'Rgbank'
 
   stage 'Deploy to production'
