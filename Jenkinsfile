@@ -35,7 +35,9 @@ node {
   puppet.hiera scope: 'dev', key: 'rgbank-mock-sql-path', value: "http://" + hostaddress + "/builds/rgbank/rgbank.sql"
   withEnv(['PATH=/opt/puppetlabs/bin:/usr/local/bin:$PATH']) {
     sh """
-      puppet job run Rgbank -e dev
+      ansiColor('xterm') {
+        puppet job run Rgbank -e dev
+      }
     """
   }
 
@@ -51,9 +53,11 @@ node {
   puppet.hiera scope: 'staging', key: 'rgbankbuildversion', value: version
   puppet.hiera scope: 'staging', key: 'rgbankbuildpath', value: "http://" + hostaddress + "/builds/rgbank/rgbankbuild${version}.tar.gz"
   puppet.hiera scope: 'staging', key: 'rgbankmocksqlpath', value: "http://" + hostaddress + "/builds/rgbank/rgbank.sql"
-  withEnv(['PATH=/usr/local/bin:$PATH']) {
+  withEnv(['PATH=/opt/puppetlabs/bin:/usr/local/bin:$PATH']) {
     sh """
-      puppet job run Rgbank -e staging
+      ansiColor('xterm') {
+        puppet job run Rgbank -e staging
+      }
     """
   }
 
@@ -69,17 +73,21 @@ node {
   puppet.hiera scope: 'production', key: 'rgbank-build-version', value: version
   puppet.hiera scope: 'production', key: 'rgbank-build-path', value: "http://" + hostaddress + "/builds/rgbank/rgbank-build-${version}.tar.gz"
   puppet.hiera scope: 'production', key: 'rgbank-mock-sql-path', value: "http://" + hostaddress + "/builds/rgbank/rgbank.sql"
-  withEnv(['PATH=/usr/local/bin:$PATH']) {
+  withEnv(['PATH=/opt/puppetlabs/bin:/usr/local/bin:$PATH']) {
     sh """
-      puppet job run Rgbank -e production --noop
+      ansiColor('xterm') {
+        puppet job run Rgbank -e production --noop
+      }
     """
   }
 
   stage 'Deploy to production'
   input "Ready to deploy to production?"
-  withEnv(['PATH=/usr/local/bin:$PATH']) {
+  withEnv(['PATH=/opt/puppetlabs/bin:/usr/local/bin:$PATH']) {
     sh """
-      puppet job run Rgbank -e production
+      ansiColor('xterm') {
+        puppet job run Rgbank -e production
+      }
     """
   }
 
