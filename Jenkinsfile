@@ -38,16 +38,6 @@ node {
   puppet.codeDeploy 'dev'
   puppet.job 'dev', target: 'Rgbank'
 
-  stage 'Promote to staging'
-  puppet.hiera scope: 'staging', key: 'rgbank-build-version', value: version
-  puppet.hiera scope: 'staging', key: 'rgbank-build-path', value: "http://" + hostaddress + "/builds/rgbank/rgbank-build-${version}.tar.gz"
-  puppet.hiera scope: 'staging', key: 'rgbank-mock-sql-path', value: "http://" + hostaddress + "/builds/rgbank/rgbank.sql"
-  puppet.codeDeploy 'staging'
-  puppet.job 'staging', target: 'Rgbank'
-
-  stage 'Staging acceptance tests'
-  // Run acceptance tests here to make sure no applications are broken
-
   stage 'Promote to production'
   input "Ready to test deploy to production?"
 
