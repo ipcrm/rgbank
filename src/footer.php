@@ -99,5 +99,6 @@
 	<?php if(isset($wl_theme_options['custom_css'])) { ?> 
 	<style type="text/css"><?php echo esc_attr($wl_theme_options['custom_css']); ?></style>
   <?php } ?>
+<b>THIS IS A TEST</b>
 </body>
 </html>
