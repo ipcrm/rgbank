@@ -46,9 +46,9 @@ node {
   }
 
   stage 'Deploy to staging'
-  puppet.hiera scope: 'staging', key: 'rgbankbuildversion', value: version
-  puppet.hiera scope: 'staging', key: 'rgbankbuildpath', value: "http://" + hostaddress + "/builds/rgbank/rgbankbuild${version}.tar.gz"
-  puppet.hiera scope: 'staging', key: 'rgbankmocksqlpath', value: "http://" + hostaddress + "/builds/rgbank/rgbank.sql"
+  puppet.hiera scope: 'staging', key: 'rgbank-build-version', value: version
+  puppet.hiera scope: 'staging', key: 'rgbank-build-path', value: "http://" + hostaddress + "/builds/rgbank/rgbankbuild${version}.tar.gz"
+  puppet.hiera scope: 'staging', key: 'rgbank-mock-sql-path', value: "http://" + hostaddress + "/builds/rgbank/rgbank.sql"
   puppet.job 'staging', application: 'Rgbank'
 
   stage 'Staging Acceptance Test'
