@@ -6,7 +6,7 @@
 	<div class="error_pagenotfound">    	
         <strong><?php _e('404',gr_td);?></strong>
         <br />
-    	<b><?php _e('Oops... Page Not Found!', gr_td);?></b>
+    	<b><?php _e('Oops!... Page Not Found!', gr_td);?></b>
         
         <em><?php _e('Sorry the Page Could not be Found here.',gr_td);?></em>
 
